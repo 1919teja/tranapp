@@ -328,9 +328,18 @@ export class MemStorage implements IStorage {
   }
 
   async getFarmerRequestsByUserId(userId: number): Promise<FarmerRequest[]> {
-    return Array.from(this.farmerRequests.values()).filter(
-      (request) => request.userId === userId
+    console.log("Storage: Getting farmer requests for userId:", userId);
+    console.log("Storage: All farmer requests:", Array.from(this.farmerRequests.entries()));
+    
+    const requests = Array.from(this.farmerRequests.values()).filter(
+      (request) => {
+        console.log("Storage: Comparing request.userId:", request.userId, "with userId:", userId);
+        return request.userId === userId;
+      }
     );
+    
+    console.log("Storage: Filtered farmer requests:", requests);
+    return requests;
   }
 
   async getAllFarmerRequests(): Promise<FarmerRequest[]> {

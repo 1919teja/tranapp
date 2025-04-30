@@ -16,6 +16,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { formatCurrency } from "@/lib/utils";
 import TripTracker from "@/components/TripTracker";
+import { Truck as TruckType } from "@shared/schema";
 
 export default function BrowseTrucksTab() {
   const { user, setContactModalOpen, setCurrentContact } = useUser();
@@ -122,6 +123,8 @@ export default function BrowseTrucksTab() {
     if (!user || !selectedTruck) return;
     
     try {
+      console.log("Submitting booking request for user:", user);
+      
       const requestData = {
         userId: user.id,
         farmerName: user.username,
@@ -135,12 +138,35 @@ export default function BrowseTrucksTab() {
         pickupTime: bookingDetails.pickupDate + " (Code: " + bookingCode + ")"
       };
 
-      await apiRequest("POST", "/api/farmer-requests", requestData);
+      console.log("Sending booking request data:", requestData);
+      
+      const response = await apiRequest("POST", "/api/farmer-requests", requestData);
+      console.log("Booking request response:", response);
       
       // Invalidate queries to refresh data
       queryClient.invalidateQueries({ queryKey: ['/api/farmer-requests/user', user.id] });
+      
+      // Fetch the updated data immediately to ensure UI reflects the change
+      const updatedRequests = await fetch(`/api/farmer-requests/user/${user.id}`);
+      const requestsData = await updatedRequests.json();
+      console.log("Updated farmer requests:", requestsData);
+      
+      // Show confirmation message
+      toast({
+        title: "Booking Created Successfully",
+        description: `Your booking #${bookingCode} has been saved and is now visible in My Requests`,
+        variant: "success"
+      });
+      
     } catch (error) {
       console.error("Failed to create booking record:", error);
+      
+      // Show error message
+      toast({
+        title: "Booking Failed",
+        description: "There was an error saving your booking. Please try again.",
+        variant: "destructive"
+      });
     }
   };
   

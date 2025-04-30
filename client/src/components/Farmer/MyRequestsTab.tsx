@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useUser } from "@/context/UserContext";
 import { Badge } from "@/components/ui/badge";
@@ -7,6 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { ClipboardList, MapPin, ExternalLink, Truck, ArrowRightCircle, Calendar } from "lucide-react";
 import TripTracker from "@/components/TripTracker";
+import { FarmerRequest } from "@shared/schema";
 
 export default function MyRequestsTab() {
   const { user, setCurrentContact } = useUser();
@@ -15,16 +16,41 @@ export default function MyRequestsTab() {
   const [showTracker, setShowTracker] = useState(false);
 
   // Query to get user's farmer requests
-  const { data: requests, isLoading } = useQuery({
+  const { data: requests, isLoading, error, refetch } = useQuery({
     queryKey: ['/api/farmer-requests/user', user?.id],
     queryFn: async ({ queryKey }) => {
       if (!user) return [];
+      console.log("Fetching farmer requests for user ID:", user.id);
+      
       const res = await fetch(`/api/farmer-requests/user/${user.id}`);
-      if (!res.ok) throw new Error('Failed to fetch farmer requests');
-      return res.json();
+      if (!res.ok) {
+        console.error("Failed to fetch farmer requests:", await res.text());
+        throw new Error('Failed to fetch farmer requests');
+      }
+      
+      const data = await res.json();
+      console.log("Received farmer requests data:", data);
+      return data;
     },
     enabled: !!user,
+    refetchInterval: 3000, // Refetch every 3 seconds to ensure data is current
+    staleTime: 1000, // Consider data stale after 1 second
   });
+  
+  // If there's an error, log it
+  useEffect(() => {
+    if (error) {
+      console.error("Error loading farmer requests:", error);
+    }
+  }, [error]);
+  
+  // Force a refresh when component mounts
+  useEffect(() => {
+    if (user) {
+      console.log("MyRequestsTab mounted, refreshing data for user ID:", user.id);
+      refetch();
+    }
+  }, [user, refetch]);
 
   const handleCancelRequest = async (requestId: number) => {
     try {

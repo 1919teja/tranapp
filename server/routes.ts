@@ -174,10 +174,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Farmer request routes
   app.post("/api/farmer-requests", async (req: Request, res: Response) => {
     try {
+      console.log("Farmer request received:", req.body);
       const requestData = insertFarmerRequestSchema.parse(req.body);
+      console.log("Farmer request validated:", requestData);
       const farmerRequest = await storage.createFarmerRequest(requestData);
+      console.log("Farmer request created:", farmerRequest);
       res.status(201).json(farmerRequest);
     } catch (error) {
+      console.error("Error creating farmer request:", error);
       if (error instanceof z.ZodError) {
         res.status(400).json({ message: "Invalid farmer request data", errors: error.errors });
       } else {
@@ -203,9 +207,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/farmer-requests/user/:userId", async (req: Request, res: Response) => {
     try {
       const userId = parseInt(req.params.userId);
+      console.log("Getting farmer requests for userId:", userId);
       const requests = await storage.getFarmerRequestsByUserId(userId);
+      console.log("Found farmer requests:", requests);
       res.json(requests);
     } catch (error) {
+      console.error("Error getting farmer requests:", error);
       res.status(500).json({ message: "Failed to fetch farmer requests for user" });
     }
   });
