@@ -155,7 +155,7 @@ export default function BrowseTrucksTab() {
       toast({
         title: "Booking Created Successfully",
         description: `Your booking #${bookingCode} has been saved and is now visible in My Requests`,
-        variant: "success"
+        variant: "default"
       });
       
     } catch (error) {
@@ -220,7 +220,7 @@ export default function BrowseTrucksTab() {
   }
 
   // Filter trucks and prioritize farmer-friendly ones
-  const availableTrucks = (trucks || []).sort((a, b) => {
+  const availableTrucks = (trucks || []).sort((a: TruckType, b: TruckType) => {
     if (a.farmerFriendly && !b.farmerFriendly) return -1;
     if (!a.farmerFriendly && b.farmerFriendly) return 1;
     return 0;
@@ -277,7 +277,7 @@ export default function BrowseTrucksTab() {
             </div>
           ) : (
             <div className="space-y-4">
-              {availableTrucks.map((truck) => (
+              {availableTrucks.map((truck: TruckType) => (
                 <div 
                   key={truck.id} 
                   className={`bg-white rounded-lg shadow-md p-4 ${truck.farmerFriendly ? 'border-l-4 border-green-600' : ''}`}

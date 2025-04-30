@@ -168,7 +168,7 @@ export default function MyRequestsTab() {
             </div>
           ) : (
             <div className="space-y-4">
-              {myRequests.map((request) => (
+              {myRequests.map((request: FarmerRequest) => (
                 <div 
                   key={request.id} 
                   className={`bg-white rounded-lg shadow-md p-4 ${
@@ -186,7 +186,7 @@ export default function MyRequestsTab() {
                         "default"
                       }
                     >
-                      {request.status.charAt(0).toUpperCase() + request.status.slice(1)}
+                      {request.status ? request.status.charAt(0).toUpperCase() + request.status.slice(1) : "Pending"}
                     </Badge>
                   </div>
                   <div className="grid grid-cols-2 gap-2 text-sm mb-3">
@@ -238,7 +238,7 @@ export default function MyRequestsTab() {
                           <div className="flex-1 border-t-2 border-gray-200"></div>
                           <div className="flex-shrink-0 mx-2 text-gray-400 text-xs">
                             <MapPin className="h-4 w-4 text-green-500 inline-block" />
-                            <span className="mx-2">Truck assigned (Code: {request.pickupCode || "FBNJYH"})</span>
+                            <span className="mx-2">Truck assigned (Code: {request.pickupTime?.match(/\(Code: (.*?)\)$/)?.[1] || "FBNJYH"})</span>
                             <Truck className="h-4 w-4 text-blue-500 inline-block" />
                           </div>
                           <div className="flex-1 border-t-2 border-gray-200"></div>
