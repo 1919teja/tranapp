@@ -341,18 +341,18 @@ export default function ContactPage() {
             <div>
               <h3 className="text-lg font-bold mb-4">Quick Links</h3>
               <ul className="space-y-2">
-                <li><a href="/" className="text-gray-400 hover:text-white">Home</a></li>
-                <li><a href="/about" className="text-gray-400 hover:text-white">About</a></li>
-                <li><a href="/contact" className="text-gray-400 hover:text-white">Contact</a></li>
-                <li><a href="/investors" className="text-gray-400 hover:text-white">Investors</a></li>
+                <li><a href="/" className="text-gray-400 hover:text-white">{t("nav.home")}</a></li>
+                <li><a href="/about" className="text-gray-400 hover:text-white">{t("nav.about")}</a></li>
+                <li><a href="/contact" className="text-gray-400 hover:text-white">{t("nav.contact")}</a></li>
+                <li><a href="/investors" className="text-gray-400 hover:text-white">{t("nav.investors")}</a></li>
               </ul>
             </div>
             <div>
               <h3 className="text-lg font-bold mb-4">Services</h3>
               <ul className="space-y-2">
-                <li><a href="#" className="text-gray-400 hover:text-white">For Truck Owners</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white">For Cargo Requesters</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white">For Farmers</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white">{t("user.truck_owner")}</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white">{t("user.cargo_requester")}</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white">{t("user.farmer")}</a></li>
                 <li><a href="#" className="text-gray-400 hover:text-white">Support</a></li>
               </ul>
             </div>
@@ -367,7 +367,7 @@ export default function ContactPage() {
             </div>
           </div>
           <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 loopout.in Telangana. All rights reserved.</p>
+            <p>&copy; 2025 {t("app.title")} Telangana. All rights reserved.</p>
           </div>
         </div>
       </footer>

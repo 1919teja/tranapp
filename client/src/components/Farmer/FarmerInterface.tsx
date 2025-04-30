@@ -1,25 +1,28 @@
 import UrgentRequestTab from "./UrgentRequestTab";
 import BrowseTrucksTab from "./BrowseTrucksTab";
 import MyRequestsTab from "./MyRequestsTab";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface FarmerInterfaceProps {
   activeTab: string;
 }
 
 export default function FarmerInterface({ activeTab }: FarmerInterfaceProps) {
+  const { t } = useLanguage();
+  
   return (
     <div>
       {/* Tab Navigation */}
       <div className="bg-white rounded-lg shadow-sm mb-6">
         <div className="flex border-b">
           <div className={`flex-1 py-3 font-medium text-center border-b-2 ${activeTab === "urgentRequest" ? "border-secondary" : "border-transparent"}`}>
-            Urgent Request
+            {t("farmer.urgent_request")}
           </div>
           <div className={`flex-1 py-3 font-medium text-center border-b-2 ${activeTab === "browseTrucks" ? "border-secondary" : "border-transparent"}`}>
-            Browse Trucks
+            {t("truck.list_title")}
           </div>
           <div className={`flex-1 py-3 font-medium text-center border-b-2 ${activeTab === "myRequests" ? "border-secondary" : "border-transparent"}`}>
-            My Requests
+            {t("cargo.my_requests")}
           </div>
         </div>
       </div>
