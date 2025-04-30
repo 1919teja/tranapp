@@ -195,7 +195,7 @@ export default function LandingPage() {
                 </div>
               </div>
               <p className="text-gray-600 italic">
-                "TruckConnect helped me transport my rice harvest during peak season when other options were unavailable. The priority service for farmers is a lifesaver!"
+                "loopout.in helped me transport my rice harvest during peak season when other options were unavailable. The priority service for farmers is a lifesaver!"
               </p>
             </div>
             
@@ -211,7 +211,7 @@ export default function LandingPage() {
                 </div>
               </div>
               <p className="text-gray-600 italic">
-                "We use TruckConnect for all our retail shipments now. The real-time tracking keeps our customers informed, and the pricing is very competitive."
+                "We use loopout.in for all our retail shipments now. The real-time tracking keeps our customers informed, and the pricing is very competitive."
               </p>
             </div>
             
@@ -242,7 +242,7 @@ export default function LandingPage() {
               Ready to simplify your transportation needs?
             </h2>
             <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              Join thousands of users who trust TruckConnect for reliable transportation solutions.
+              Join thousands of users who trust loopout.in for reliable transportation solutions.
             </p>
             <Link href="/app">
               <Button size="lg" className="font-medium text-base bg-white text-primary hover:bg-gray-100">
@@ -287,12 +287,12 @@ export default function LandingPage() {
                 123 Transport Street<br />
                 Hyderabad, Telangana 500001<br />
                 India<br />
-                <a href="mailto:info@truckconnect.in" className="hover:text-white">info@truckconnect.in</a>
+                <a href="mailto:info@loopout.in" className="hover:text-white">info@loopout.in</a>
               </address>
             </div>
           </div>
           <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 TruckConnect Telangana. All rights reserved.</p>
+            <p>&copy; 2025 loopout.in Telangana. All rights reserved.</p>
           </div>
         </div>
       </footer>
