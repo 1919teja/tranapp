@@ -61,6 +61,86 @@ export class MemStorage implements IStorage {
     this.truckIdCounter = 1;
     this.cargoRequestIdCounter = 1;
     this.farmerRequestIdCounter = 1;
+    
+    // Add some sample trucks for testing
+    this.createDummyData();
+  }
+  
+  private createDummyData() {
+    // Add a dummy truck owner
+    const truckOwner: User = {
+      id: this.userIdCounter++,
+      username: "truck_owner1",
+      password: "password",
+      userType: "truck-owner" as const,
+      phoneNumber: "9876543210",
+      createdAt: new Date(),
+    };
+    this.users.set(truckOwner.id, truckOwner);
+    
+    // Add some sample trucks with different specifications
+    const dummyTrucks: InsertTruck[] = [
+      {
+        userId: truckOwner.id,
+        truckType: "mini" as const,
+        capacity: 1.5,
+        registrationNumber: "TS01AB1234",
+        driverName: "Raj Kumar",
+        location: "Hyderabad Central",
+        description: "Small pickup for light loads",
+        farmerFriendly: true,
+        available: true
+      },
+      {
+        userId: truckOwner.id,
+        truckType: "light" as const,
+        capacity: 3,
+        registrationNumber: "TS02CD5678",
+        driverName: "Suresh Reddy",
+        location: "Secunderabad",
+        description: "Light commercial vehicle for general cargo",
+        farmerFriendly: false,
+        available: true
+      },
+      {
+        userId: truckOwner.id,
+        truckType: "medium" as const,
+        capacity: 6,
+        registrationNumber: "TS03EF9012",
+        driverName: "Venkat Rao",
+        location: "Gachibowli",
+        description: "Medium duty truck for larger loads",
+        farmerFriendly: true,
+        available: true
+      },
+      {
+        userId: truckOwner.id,
+        truckType: "heavy" as const,
+        capacity: 12,
+        registrationNumber: "TS04GH3456",
+        driverName: "Mohammad Ali",
+        location: "Uppal",
+        description: "Heavy duty truck for industrial cargo",
+        farmerFriendly: false,
+        available: true
+      },
+      {
+        userId: truckOwner.id,
+        truckType: "tractor" as const,
+        capacity: 15,
+        registrationNumber: "TS05IJ7890",
+        driverName: "Ramesh Chandra",
+        location: "Warangal",
+        description: "Tractor with trailer for agricultural loads",
+        farmerFriendly: true,
+        available: true
+      }
+    ];
+    
+    // Create trucks in the storage
+    dummyTrucks.forEach(truck => {
+      this.createTruck(truck);
+    });
   }
 
   // User methods
