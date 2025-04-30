@@ -26,7 +26,7 @@ export default function PartnersPage() {
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Strategic Partnerships</h2>
             <p className="max-w-3xl mx-auto text-lg text-gray-600">
-              TruckConnect collaborates with leading organizations to create a robust logistics ecosystem.
+              {t("app.title")} collaborates with leading organizations to create a robust logistics ecosystem.
             </p>
           </div>
           
@@ -175,10 +175,10 @@ export default function PartnersPage() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl text-white font-bold mb-6">Become a Partner</h2>
           <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-            Interested in partnering with TruckConnect to transform rural logistics? Reach out to our partnership team today.
+            Interested in partnering with {t("app.title")} to transform rural logistics? Reach out to our partnership team today.
           </p>
           <a 
-            href="mailto:partnerships@truckconnect.in" 
+            href="mailto:partnerships@loopout.in" 
             className="inline-block px-8 py-3 bg-white text-primary font-medium rounded-md hover:bg-gray-100 transition"
           >
             Contact Our Partnership Team

@@ -14,7 +14,7 @@ export default function AboutPage() {
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">{t("about.title")}</h1>
           <div className="w-24 h-1 bg-primary mx-auto mb-8"></div>
           <p className="max-w-2xl mx-auto text-xl text-gray-600">
-            TruckConnect Telangana is revolutionizing the way cargo transportation works in rural and urban areas.
+            {t("app.title")} Telangana is revolutionizing the way cargo transportation works in rural and urban areas.
           </p>
         </div>
       </section>
@@ -33,14 +33,14 @@ export default function AboutPage() {
             <h2 className="text-3xl font-bold text-gray-900 mb-6">{t("about.vision")}</h2>
             <p className="text-lg text-gray-600 mb-8">
               We envision a future where transportation is not a barrier for farmers bringing their produce to 
-              market or for businesses seeking to expand their reach. TruckConnect aims to be the backbone 
+              market or for businesses seeking to expand their reach. {t("app.title")} aims to be the backbone 
               of logistics infrastructure in Telangana, connecting every village and town with reliable 
               transportation options.
             </p>
             
             <h2 className="text-3xl font-bold text-gray-900 mb-6">{t("about.team")}</h2>
             <p className="text-lg text-gray-600 mb-8">
-              Founded by a team of logistics experts and technology innovators, TruckConnect combines deep 
+              Founded by a team of logistics experts and technology innovators, {t("app.title")} combines deep 
               industry knowledge with cutting-edge technology to solve real-world transportation challenges.
             </p>
             
@@ -73,7 +73,7 @@ export default function AboutPage() {
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12 mt-auto">
         <div className="container mx-auto px-4 text-center">
-          <p>&copy; 2025 TruckConnect Telangana. All rights reserved.</p>
+          <p>&copy; 2025 {t("app.title")} Telangana. All rights reserved.</p>
         </div>
       </footer>
     </div>
