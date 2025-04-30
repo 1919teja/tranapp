@@ -1,4 +1,5 @@
 import { useUser } from "@/context/UserContext";
+import { useLanguage } from "@/context/LanguageContext";
 import { TruckIcon, BoxIcon, FolderIcon } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
@@ -7,6 +8,7 @@ import { apiRequest } from "@/lib/queryClient";
 export default function UserTypeSelection() {
   try {
     const { setUserType, setUser } = useUser();
+    const { t } = useLanguage();
     const { toast } = useToast();
     const [loading, setLoading] = useState<boolean>(false);
     
@@ -28,7 +30,7 @@ export default function UserTypeSelection() {
         setUserType(userType);
         
         toast({
-          title: "Welcome to TruckConnect",
+          title: `${t("app.title")}`,
           description: `You are now logged in as a ${userType.replace("-", " ")}`
         });
       } catch (error) {
@@ -44,7 +46,7 @@ export default function UserTypeSelection() {
 
     return (
       <div className="flex flex-col items-center justify-center py-8">
-        <h2 className="text-2xl font-bold text-gray-800 mb-8 text-center">Choose Your Role</h2>
+        <h2 className="text-2xl font-bold text-gray-800 mb-8 text-center">{t("app.select_user_type")}</h2>
         
         <div className="grid grid-cols-1 gap-6 w-full max-w-md">
           {/* Truck Owner Card */}
@@ -57,7 +59,7 @@ export default function UserTypeSelection() {
               <div className="bg-primary/10 p-3 rounded-full mr-4">
                 <TruckIcon className="h-8 w-8 text-primary" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-800">Truck Owner</h3>
+              <h3 className="text-lg font-semibold text-gray-800">{t("user.truck_owner")}</h3>
             </div>
             <p className="text-gray-600 text-sm">List your truck and find cargo requests from farmers and businesses.</p>
           </button>
@@ -72,7 +74,7 @@ export default function UserTypeSelection() {
               <div className="bg-accent/10 p-3 rounded-full mr-4">
                 <BoxIcon className="h-8 w-8 text-accent" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-800">Cargo Requester</h3>
+              <h3 className="text-lg font-semibold text-gray-800">{t("user.cargo_requester")}</h3>
             </div>
             <p className="text-gray-600 text-sm">Post your cargo needs and connect with available truck owners.</p>
           </button>
@@ -87,7 +89,7 @@ export default function UserTypeSelection() {
               <div className="bg-secondary/10 p-3 rounded-full mr-4">
                 <FolderIcon className="h-8 w-8 text-secondary" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-800">Farmer (Rythu Suvidha)</h3>
+              <h3 className="text-lg font-semibold text-gray-800">{t("user.farmer")}</h3>
             </div>
             <p className="text-gray-600 text-sm">Urgent transport for your crops. Priority service for farmers.</p>
           </button>

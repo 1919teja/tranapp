@@ -4,6 +4,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import ContactModal from "./components/ContactModal";
+import { UserProvider } from "@/context/UserContext";
+import { LanguageProvider } from "@/context/LanguageContext";
 
 // Simple Router without any context dependency
 function AppRouter() {
@@ -18,10 +20,14 @@ function AppRouter() {
 function App() {
   return (
     <TooltipProvider>
-      <Toaster />
-      <AppRouter />
-      {/* ContactModal will be conditionally rendered within its own component */}
-      <ContactModal />
+      <UserProvider>
+        <LanguageProvider>
+          <Toaster />
+          <AppRouter />
+          {/* ContactModal will be conditionally rendered within its own component */}
+          <ContactModal />
+        </LanguageProvider>
+      </UserProvider>
     </TooltipProvider>
   );
 }
