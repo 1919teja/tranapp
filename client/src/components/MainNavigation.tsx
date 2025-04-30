@@ -37,7 +37,7 @@ export default function MainNavigation() {
           {/* Logo and App title */}
           <div className="flex items-center space-x-3">
             <Link href="/" className="text-xl md:text-2xl font-bold flex items-center">
-              {t("app.title")} Telangana
+              <img src="/images/loopout-logo.svg" alt="loopout.in" className="h-10 mr-2" />
             </Link>
           </div>
 

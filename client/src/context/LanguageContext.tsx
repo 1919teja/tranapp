@@ -15,7 +15,7 @@ type TranslationsType = Record<Language, Record<string, string>>;
 
 const translations: TranslationsType = {
   english: {
-    "app.title": "TruckConnect",
+    "app.title": "loopout.in",
     "app.language": "Language",
     "app.select_user_type": "Choose Your Role",
     "app.tagline": "Connecting Farmers & Businesses with Reliable Transport",
@@ -90,7 +90,7 @@ const translations: TranslationsType = {
     "investors.description": "Backing our mission to transform rural transportation"
   },
   telugu: {
-    "app.title": "ట్రక్ కనెక్ట్",
+    "app.title": "లూపౌట్.ఇన్",
     "app.language": "భాష",
     "app.select_user_type": "మీ పాత్రను ఎంచుకోండి",
     "user.truck_owner": "ట్రక్ యజమాని",
@@ -122,7 +122,7 @@ const translations: TranslationsType = {
     "logout.success": "విజయవంతంగా లాగ్ అవుట్ అయ్యారు"
   },
   hindi: {
-    "app.title": "ट्रक कनेक्ट",
+    "app.title": "लूपआउट.इन",
     "app.language": "भाषा",
     "app.select_user_type": "अपनी भूमिका चुनें",
     "user.truck_owner": "ट्रक मालिक",
@@ -154,7 +154,7 @@ const translations: TranslationsType = {
     "logout.success": "सफलतापूर्वक लॉग आउट किया गया"
   },
   tamil: {
-    "app.title": "டிரக் கனெக்ட்",
+    "app.title": "லூப்அவுட்.இன்",
     "app.language": "மொழி",
     "app.select_user_type": "உங்கள் பங்கைத் தேர்ந்தெடுக்கவும்",
     "user.truck_owner": "லாரி உரிமையாளர்",
