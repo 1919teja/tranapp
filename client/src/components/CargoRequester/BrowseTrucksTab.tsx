@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { formatCurrency } from "@/lib/utils";
+import TripTracker from "@/components/TripTracker";
 
 export default function BrowseTrucksTab() {
   const { user, setContactModalOpen, setCurrentContact } = useUser();
@@ -30,6 +31,7 @@ export default function BrowseTrucksTab() {
   const [showPaymentDialog, setShowPaymentDialog] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<string>("cash");
   const [showBookingDialog, setShowBookingDialog] = useState(false);
+  const [showTrackingUI, setShowTrackingUI] = useState(false);
   const [confirmationCode, setConfirmationCode] = useState<string>("");
 
   // Query to get all available trucks
@@ -123,11 +125,12 @@ export default function BrowseTrucksTab() {
   const handleBookingComplete = () => {
     toast({
       title: "Booking Confirmed",
-      description: `Your booking (#${confirmationCode}) has been confirmed. Driver details will be sent to you shortly.`,
+      description: `Your booking (#${confirmationCode}) has been confirmed. Starting trip tracking...`,
     });
     
     setShowBookingDialog(false);
     setBookingStep(0);
+    setShowTrackingUI(true);
   };
   
   const handleContactDriver = () => {
@@ -172,69 +175,93 @@ export default function BrowseTrucksTab() {
 
   return (
     <div>
-      <div className="bg-white rounded-lg shadow-md p-4 mb-6">
-        <div className="flex justify-between items-center">
-          <h3 className="text-lg font-semibold">Available Trucks</h3>
-          <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
-            {availableTrucks.length} Available
-          </Badge>
-        </div>
-      </div>
-
-      {availableTrucks.length === 0 ? (
-        <div className="bg-white rounded-lg shadow-md p-6 text-center">
-          <Truck className="h-12 w-12 mx-auto text-gray-400 mb-2" />
-          <h3 className="text-lg font-medium text-gray-900">No Trucks Available</h3>
-          <p className="text-gray-500 mt-1">Check back later for available trucks.</p>
+      {showTrackingUI && selectedTruck ? (
+        <div className="pt-4">
+          <TripTracker
+            tripId={confirmationCode}
+            vehicleType={
+              selectedTruck.truckType === "mini" ? "Mini Truck" :
+              selectedTruck.truckType === "light" ? "Light Commercial Truck" :
+              selectedTruck.truckType === "medium" ? "Medium Duty Truck" :
+              selectedTruck.truckType === "heavy" ? "Heavy Duty Truck" :
+              "Tractor with Trailer"
+            }
+            driverName={`Driver ${selectedTruck.registrationNumber.substring(0, 4)}`}
+            pickupLocation={bookingDetails.pickupLocation}
+            deliveryLocation={bookingDetails.deliveryLocation}
+            estimatedTime={(Math.floor(Math.random() * 30) + 15) + " minutes"}
+            fare={fareEstimate || 0}
+            onClose={() => setShowTrackingUI(false)}
+            onContactDriver={handleContactDriver}
+          />
         </div>
       ) : (
-        <div className="space-y-4">
-          {availableTrucks.map((truck) => (
-            <div key={truck.id} className="bg-white rounded-lg shadow-md p-4">
-              <div className="flex justify-between items-start mb-2">
-                <h4 className="font-medium text-gray-800">
-                  {truck.truckType === "mini" && "Mini Truck"}
-                  {truck.truckType === "light" && "Light Commercial Truck"}
-                  {truck.truckType === "medium" && "Medium Duty Truck"}
-                  {truck.truckType === "heavy" && "Heavy Duty Truck"}
-                  {truck.truckType === "tractor" && "Tractor with Trailer"}
-                </h4>
-                <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
-                  {truck.farmerFriendly ? "Farmer-Friendly" : "Available"}
-                </Badge>
-              </div>
-              <div className="grid grid-cols-2 gap-2 text-sm mb-3">
-                <div>
-                  <p className="text-gray-500">Type:</p>
-                  <p className="font-medium">
-                    {truck.truckType === "mini" && "Mini Truck"}
-                    {truck.truckType === "light" && "Light Commercial"}
-                    {truck.truckType === "medium" && "Medium Duty"}
-                    {truck.truckType === "heavy" && "Heavy Duty"}
-                    {truck.truckType === "tractor" && "Tractor with Trailer"} ({truck.capacity} Ton)
-                  </p>
-                </div>
-                <div>
-                  <p className="text-gray-500">Location:</p>
-                  <p className="font-medium">{truck.location}</p>
-                </div>
-                <div>
-                  <p className="text-gray-500">Reg. Number:</p>
-                  <p className="font-medium">{truck.registrationNumber}</p>
-                </div>
-                <div>
-                  <p className="text-gray-500">Est. Fare:</p>
-                  <p className="font-medium">{formatCurrency(truck.capacity * 200)}/trip</p>
-                </div>
-              </div>
-              <div className="flex justify-end">
-                <Button onClick={() => handleStartBooking(truck)}>
-                  Book Now
-                </Button>
-              </div>
+        <>
+          <div className="bg-white rounded-lg shadow-md p-4 mb-6">
+            <div className="flex justify-between items-center">
+              <h3 className="text-lg font-semibold">Available Trucks</h3>
+              <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
+                {availableTrucks.length} Available
+              </Badge>
             </div>
-          ))}
-        </div>
+          </div>
+
+          {availableTrucks.length === 0 ? (
+            <div className="bg-white rounded-lg shadow-md p-6 text-center">
+              <Truck className="h-12 w-12 mx-auto text-gray-400 mb-2" />
+              <h3 className="text-lg font-medium text-gray-900">No Trucks Available</h3>
+              <p className="text-gray-500 mt-1">Check back later for available trucks.</p>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {availableTrucks.map((truck) => (
+                <div key={truck.id} className="bg-white rounded-lg shadow-md p-4">
+                  <div className="flex justify-between items-start mb-2">
+                    <h4 className="font-medium text-gray-800">
+                      {truck.truckType === "mini" && "Mini Truck"}
+                      {truck.truckType === "light" && "Light Commercial Truck"}
+                      {truck.truckType === "medium" && "Medium Duty Truck"}
+                      {truck.truckType === "heavy" && "Heavy Duty Truck"}
+                      {truck.truckType === "tractor" && "Tractor with Trailer"}
+                    </h4>
+                    <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
+                      {truck.farmerFriendly ? "Farmer-Friendly" : "Available"}
+                    </Badge>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2 text-sm mb-3">
+                    <div>
+                      <p className="text-gray-500">Type:</p>
+                      <p className="font-medium">
+                        {truck.truckType === "mini" && "Mini Truck"}
+                        {truck.truckType === "light" && "Light Commercial"}
+                        {truck.truckType === "medium" && "Medium Duty"}
+                        {truck.truckType === "heavy" && "Heavy Duty"}
+                        {truck.truckType === "tractor" && "Tractor with Trailer"} ({truck.capacity} Ton)
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-gray-500">Location:</p>
+                      <p className="font-medium">{truck.location}</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-500">Reg. Number:</p>
+                      <p className="font-medium">{truck.registrationNumber}</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-500">Est. Fare:</p>
+                      <p className="font-medium">{formatCurrency(truck.capacity * 200)}/trip</p>
+                    </div>
+                  </div>
+                  <div className="flex justify-end">
+                    <Button onClick={() => handleStartBooking(truck)}>
+                      Book Now
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </>
       )}
 
       {/* Booking Dialog - Multi-step form similar to Uber/Rapido */}
