@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <style>
+    @keyframes moveRight {
+      0% { transform: translateX(-200px); }
+      100% { transform: translateX(1000px); }
+    }
+    @keyframes moveLeft {
+      0% { transform: translateX(1000px); }
+      100% { transform: translateX(-200px); }
+    }
+    .dot-right { 
+      animation: moveRight 20s linear infinite;
+    }
+    .dot-left { 
+      animation: moveLeft 15s linear infinite;
+    }
+  </style>
+  
+  <rect width="800" height="600" fill="none" />
+  
+  <!-- Dots moving right -->
+  <g class="dot-right">
+    <circle cx="100" cy="100" r="8" fill="white" opacity="0.3" />
+    <circle cx="150" cy="200" r="6" fill="white" opacity="0.2" />
+    <circle cx="180" cy="300" r="10" fill="white" opacity="0.3" />
+    <circle cx="220" cy="150" r="7" fill="white" opacity="0.2" />
+    <circle cx="280" cy="250" r="9" fill="white" opacity="0.4" />
+    <circle cx="350" cy="180" r="5" fill="white" opacity="0.2" />
+    <circle cx="400" cy="280" r="8" fill="white" opacity="0.3" />
+    <circle cx="450" cy="120" r="6" fill="white" opacity="0.2" />
+    <circle cx="500" cy="220" r="10" fill="white" opacity="0.3" />
+  </g>
+  
+  <!-- Dots moving left -->
+  <g class="dot-left">
+    <circle cx="120" cy="140" r="7" fill="white" opacity="0.2" />
+    <circle cx="170" cy="240" r="5" fill="white" opacity="0.1" />
+    <circle cx="200" cy="340" r="9" fill="white" opacity="0.3" />
+    <circle cx="240" cy="190" r="6" fill="white" opacity="0.2" />
+    <circle cx="300" cy="290" r="8" fill="white" opacity="0.3" />
+    <circle cx="370" cy="220" r="4" fill="white" opacity="0.1" />
+    <circle cx="420" cy="320" r="7" fill="white" opacity="0.2" />
+    <circle cx="470" cy="160" r="5" fill="white" opacity="0.1" />
+    <circle cx="520" cy="260" r="9" fill="white" opacity="0.3" />
+  </g>
+</svg>

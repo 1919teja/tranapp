@@ -31,27 +31,25 @@ export default function MainNavigation() {
   ];
 
   return (
-    <header className="bg-primary text-white sticky top-0 z-50">
+    <header className="bg-gradient-to-r from-primary-dark via-primary to-purple-600 text-white sticky top-0 z-50 shadow-lg">
       <div className="container mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
           {/* Logo and App title */}
           <div className="flex items-center space-x-3">
-            <Link href="/">
-              <a className="text-xl md:text-2xl font-bold flex items-center">
-                {t("app.title")} Telangana
-              </a>
+            <Link href="/" className="text-xl md:text-2xl font-bold flex items-center">
+              {t("app.title")} Telangana
             </Link>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
             {navigationItems.map((item) => (
-              <Link key={item.href} href={item.href}>
-                <a className={`text-sm font-medium transition-colors hover:text-white/80 ${
+              <Link key={item.href} href={item.href}
+                className={`text-sm font-medium transition-colors hover:text-white/80 ${
                   location === item.href ? "text-white underline underline-offset-4" : "text-white/70"
-                }`}>
-                  {item.name}
-                </a>
+                }`}
+              >
+                {item.name}
               </Link>
             ))}
           </nav>

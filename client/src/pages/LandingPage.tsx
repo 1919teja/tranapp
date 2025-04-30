@@ -11,28 +11,51 @@ export default function LandingPage() {
     <div className="min-h-screen flex flex-col">
       <MainNavigation />
       
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-primary to-primary-dark">
-        <div className="absolute inset-0 bg-[url('/hero-bg.jpg')] bg-cover bg-center opacity-20 mix-blend-overlay"></div>
+      {/* Hero Section with Animated Background */}
+      <section className="relative bg-gradient-to-br from-primary-dark via-primary to-purple-600 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/images/moving-dots.svg')] bg-repeat opacity-30"></div>
+        
         <div className="container mx-auto px-4 py-20 md:py-24 relative z-10">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-              {t("home.hero.title")}
-            </h1>
-            <p className="text-xl md:text-2xl text-white/90 mb-8">
-              {t("home.hero.subtitle")}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/app">
-                <Button size="lg" className="font-medium text-base bg-white text-primary hover:bg-gray-100">
-                  {t("app.cta")} <ArrowRight className="ml-2 h-5 w-5" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div className="max-w-3xl">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+                {t("home.hero.title")}
+              </h1>
+              <p className="text-xl md:text-2xl text-white/90 mb-8">
+                {t("home.hero.subtitle")}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href="/app">
+                  <Button size="lg" className="font-medium text-base bg-white text-primary hover:bg-gray-100">
+                    {t("app.cta")} <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
+                <Button size="lg" variant="outline" className="font-medium text-base border-white text-white hover:bg-white/10">
+                  {t("button.learn_more")}
                 </Button>
-              </Link>
-              <Button size="lg" variant="outline" className="font-medium text-base border-white text-white hover:bg-white/10">
-                {t("button.learn_more")}
-              </Button>
+              </div>
+            </div>
+            
+            <div className="hidden md:block">
+              <img 
+                src="/images/truck-illustration.svg" 
+                alt="Transportation Illustration" 
+                className="w-full h-auto max-h-[400px] object-contain animate-bounce-slow" 
+                style={{ animationDuration: '6s' }}
+              />
             </div>
           </div>
+        </div>
+        
+        {/* Wave Divider */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" className="w-full h-auto">
+            <path 
+              fill="#ffffff" 
+              fillOpacity="1" 
+              d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,100L1360,100C1280,100,1120,100,960,100C800,100,640,100,480,100C320,100,160,100,80,100L0,100Z"
+            ></path>
+          </svg>
         </div>
       </section>
 

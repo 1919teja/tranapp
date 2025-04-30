@@ -13,7 +13,7 @@
   --card-foreground: 20 14.3% 4.1%;
   --border: 20 5.9% 90%;
   --input: 20 5.9% 90%;
-  --primary: 227.2 71.4% 55.9%; /* #4F46E5 - Indigo */
+  --primary: 280 100% 50%; /* #8000FF - Vibrant Purple */
   --primary-foreground: 211 100% 99%;
   --secondary: 145.7 64.5% 36.1%; /* #16A34A - Green */
   --secondary-foreground: 0 0% 98%;
@@ -38,7 +38,7 @@
   --card-foreground: 0 0% 98%;
   --border: 240 3.7% 15.9%;
   --input: 240 3.7% 15.9%;
-  --primary: 227.2 71.4% 55.9%;
+  --primary: 280 100% 50%;
   --primary-foreground: 211 100% 99%;
   --secondary: 145.7 64.5% 36.1%;
   --secondary-foreground: 0 0% 98%;
@@ -83,4 +83,18 @@
 
 .bottom-nav-farmer-active {
   @apply text-secondary;
+}
+
+/* Animations */
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 6s infinite ease-in-out;
 }
