@@ -26,7 +26,7 @@ export default function LanguageSelector() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm" className="h-8 gap-1 px-2">
+        <Button variant="secondary" size="sm" className="h-8 gap-1 px-3 bg-white text-primary hover:bg-gray-100 border-white">
           {getLanguageIcon()}
           {language === "english" ? "English" : 
            language === "telugu" ? "తెలుగు" : 
@@ -34,12 +34,12 @@ export default function LanguageSelector() {
           <span className="sr-only">{t("app.language")}</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" className="min-w-32">
         {languages.map((lang) => (
           <DropdownMenuItem
             key={lang.code}
             onClick={() => setLanguage(lang.code as any)}
-            className={language === lang.code ? "bg-accent" : ""}
+            className={`${language === lang.code ? "bg-accent font-medium" : ""} px-4 py-2 cursor-pointer`}
           >
             {lang.name}
           </DropdownMenuItem>
