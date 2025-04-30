@@ -18,20 +18,31 @@ const translations: TranslationsType = {
     "app.title": "TruckConnect",
     "app.language": "Language",
     "app.select_user_type": "Choose Your Role",
+    "app.tagline": "Connecting Farmers & Businesses with Reliable Transport",
+    "app.description": "A logistics platform that connects truck owners with cargo requesters and farmers for efficient transportation solutions.",
+    "app.cta": "Get Started",
+    
     "user.truck_owner": "Truck Owner",
     "user.cargo_requester": "Cargo Requester",
     "user.farmer": "Farmer (Rythu Suvidha)",
+    
     "truck.list_title": "Available Trucks",
     "truck.capacity": "Capacity",
     "truck.location": "Location",
     "truck.book_now": "Book Now",
+    
     "cargo.post_title": "Post Cargo Request",
     "cargo.my_requests": "My Requests",
+    
     "farmer.urgent_request": "Urgent Request",
+    
     "button.submit": "Submit",
     "button.cancel": "Cancel",
     "button.book": "Book",
     "button.contact": "Contact Driver",
+    "button.logout": "Logout",
+    "button.learn_more": "Learn More",
+    
     "trip.status": "Trip Status",
     "trip.estimated_arrival": "Estimated Arrival",
     "trip.pickup": "Pickup",
@@ -42,9 +53,41 @@ const translations: TranslationsType = {
     "trip.completed": "Completed",
     "trip.in_progress": "In Progress",
     "trip.not_started": "Not Started",
+    
     "error.general": "An error occurred. Please try again.",
+    
     "login.success": "Successfully logged in",
-    "logout.success": "Successfully logged out"
+    
+    "logout.success": "Successfully logged out",
+    "logout.message": "You have been logged out of your account",
+    
+    "nav.home": "Home",
+    "nav.about": "About",
+    "nav.investors": "Investors",
+    "nav.partners": "Partners",
+    
+    "home.hero.title": "Fast, Reliable Transportation Solutions",
+    "home.hero.subtitle": "Connect with trucks nearby for all your cargo needs",
+    "home.section1.title": "How It Works",
+    "home.section1.step1": "Select your user type",
+    "home.section1.step2": "Post your request or find available trucks",
+    "home.section1.step3": "Book a truck and track your shipment",
+    "home.section2.title": "Why Choose TruckConnect?",
+    "home.section2.reason1": "Reliable truck owners and verified routes",
+    "home.section2.reason2": "Real-time tracking and updates",
+    "home.section2.reason3": "Priority service for farmers",
+    "home.testimonials.title": "What Our Users Say",
+    
+    "about.title": "About TruckConnect",
+    "about.mission": "Our Mission",
+    "about.vision": "Our Vision",
+    "about.team": "Our Team",
+    
+    "partners.title": "Our Partners",
+    "partners.description": "Working together to provide the best transportation solutions",
+    
+    "investors.title": "Investors",
+    "investors.description": "Backing our mission to transform rural transportation"
   },
   telugu: {
     "app.title": "ట్రక్ కనెక్ట్",
