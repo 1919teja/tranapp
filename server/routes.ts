@@ -14,6 +14,7 @@ import { z } from "zod";
 export async function registerRoutes(app: Express): Promise<Server> {
   // Serve static files from the public directory
   app.use('/images', express.static(path.join(process.cwd(), 'public/images')));
+  app.use('/videos', express.static(path.join(process.cwd(), 'public/videos')));
   
   // User routes
   app.post("/api/users", async (req: Request, res: Response) => {

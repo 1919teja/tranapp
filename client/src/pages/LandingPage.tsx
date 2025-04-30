@@ -11,11 +11,25 @@ export default function LandingPage() {
     <div className="min-h-screen flex flex-col">
       <MainNavigation />
       
-      {/* Hero Section with Animated Background */}
-      <section className="relative bg-gradient-to-br from-gray-900 via-primary to-blue-400 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/images/moving-dots.svg')] bg-repeat opacity-30"></div>
+      {/* Hero Section with Video Background */}
+      <section className="relative overflow-hidden">
+        {/* Video Background */}
+        <div className="absolute inset-0 w-full h-full z-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-primary to-blue-400 opacity-60 z-10"></div>
+          <video 
+            className="absolute inset-0 w-full h-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+          >
+            <source src="/videos/logistics-video.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div className="absolute inset-0 bg-[url('/images/moving-dots.svg')] bg-repeat opacity-30 z-20"></div>
         
-        <div className="container mx-auto px-4 py-20 md:py-24 relative z-10">
+        <div className="container mx-auto px-4 py-20 md:py-24 relative z-30">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="max-w-3xl">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
@@ -48,7 +62,7 @@ export default function LandingPage() {
         </div>
         
         {/* Wave Divider */}
-        <div className="absolute bottom-0 left-0 right-0">
+        <div className="absolute bottom-0 left-0 right-0 z-40">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" className="w-full h-auto">
             <path 
               fill="#ffffff" 
