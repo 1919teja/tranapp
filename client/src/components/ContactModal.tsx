@@ -2,13 +2,24 @@ import { useState } from "react";
 import { useUser } from "@/context/UserContext";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "./ui/button";
-import { X, Phone, MessageCircle } from "lucide-react";
+import { X, Phone, MessageCircle, Calendar, IndianRupee, CheckCircle } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { formatCurrency } from "@/lib/utils";
 
 export default function ContactModal() {
   try {
     const { currentContact, setContactModalOpen, contactModalOpen } = useUser();
     const { toast } = useToast();
     const [copied, setCopied] = useState(false);
+    const [paymentAmount, setPaymentAmount] = useState("1500");
+    const [message, setMessage] = useState("");
+    const [showPaymentDialog, setShowPaymentDialog] = useState(false);
+    const [showScheduleDialog, setShowScheduleDialog] = useState(false);
+    const [pickupDate, setPickupDate] = useState("");
+    const [processing, setProcessing] = useState(false);
 
     const handleClose = () => {
       setContactModalOpen(false);
@@ -46,6 +57,65 @@ export default function ContactModal() {
       }, 1000);
     };
 
+    const handleInitiatePayment = () => {
+      setShowPaymentDialog(true);
+    };
+
+    const handleProcessPayment = () => {
+      if (!paymentAmount || isNaN(Number(paymentAmount)) || Number(paymentAmount) <= 0) {
+        toast({
+          title: "Invalid Amount",
+          description: "Please enter a valid payment amount",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      setProcessing(true);
+      
+      // Simulate payment processing
+      setTimeout(() => {
+        setProcessing(false);
+        setShowPaymentDialog(false);
+        
+        toast({
+          title: "Payment Request Sent",
+          description: `Payment request of ${formatCurrency(Number(paymentAmount))} sent to ${currentContact?.name}. You will be notified when they complete the payment.`,
+        });
+      }, 1500);
+    };
+
+    const handleSchedulePickup = () => {
+      setShowScheduleDialog(true);
+    };
+
+    const handleConfirmSchedule = () => {
+      if (!pickupDate) {
+        toast({
+          title: "Date Required",
+          description: "Please select a pickup date",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      setProcessing(true);
+      
+      // Simulate schedule processing
+      setTimeout(() => {
+        setProcessing(false);
+        setShowScheduleDialog(false);
+        
+        toast({
+          title: "Pickup Scheduled",
+          description: `Pickup has been scheduled for ${pickupDate}. Details sent to ${currentContact?.name}.`,
+        });
+        
+        // Close main modal after scheduling
+        setContactModalOpen(false);
+      }, 1500);
+    };
+
     // Only render if the modal is supposed to be open
     if (!contactModalOpen) return null;
 
@@ -58,44 +128,196 @@ export default function ContactModal() {
               <X className="h-6 w-6" />
             </button>
           </div>
+          
           <div className="mb-4">
-            <p className="text-gray-700 mb-2">You can contact this person directly at:</p>
-            <div className="flex items-center justify-between bg-gray-100 p-3 rounded-lg">
-              <div className="flex items-center">
-                <Phone className="h-5 w-5 text-primary mr-2" />
-                <span className="font-medium">{currentContact?.phone || "9876543210"}</span>
+            <div className="flex items-center mb-2">
+              <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+                <span className="text-primary font-semibold">
+                  {currentContact?.name?.substring(0, 2).toUpperCase() || "TU"}
+                </span>
               </div>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={handleCopyNumber}
-                className="text-primary text-sm"
-              >
-                {copied ? "Copied" : "Copy"}
-              </Button>
+              <div>
+                <h4 className="font-medium">{currentContact?.name || "User"}</h4>
+                <p className="text-sm text-gray-500">Transport Partner</p>
+              </div>
+            </div>
+            
+            <div className="bg-gray-100 p-3 rounded-lg mb-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <Phone className="h-5 w-5 text-primary mr-2" />
+                  <span className="font-medium">{currentContact?.phone || "9876543210"}</span>
+                </div>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={handleCopyNumber}
+                  className="text-primary text-sm"
+                >
+                  {copied ? "Copied" : "Copy"}
+                </Button>
+              </div>
+            </div>
+            
+            <div className="space-y-2">
+              <h4 className="text-sm font-medium">Quick Actions</h4>
+              <div className="grid grid-cols-2 gap-2">
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  className="flex items-center justify-center"
+                  onClick={handleSimulateCall}
+                >
+                  <Phone className="h-4 w-4 mr-1" />
+                  Call
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  className="flex items-center justify-center"
+                  onClick={handleSimulateSMS}
+                >
+                  <MessageCircle className="h-4 w-4 mr-1" />
+                  SMS
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  className="flex items-center justify-center"
+                  onClick={handleInitiatePayment}
+                >
+                  <IndianRupee className="h-4 w-4 mr-1" />
+                  Payment
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  className="flex items-center justify-center"
+                  onClick={handleSchedulePickup}
+                >
+                  <Calendar className="h-4 w-4 mr-1" />
+                  Schedule
+                </Button>
+              </div>
             </div>
           </div>
-          <div className="mt-6">
-            <p className="text-gray-500 text-sm mb-4">This is a simulation. In a real app, you would be able to call or message directly.</p>
-            <div className="flex space-x-2">
-              <Button 
-                className="flex-1" 
-                onClick={handleSimulateCall}
-              >
-                <Phone className="h-4 w-4 mr-2" />
-                Simulate Call
-              </Button>
-              <Button 
-                variant="outline" 
-                className="flex-1 border-primary text-primary hover:bg-primary/5"
-                onClick={handleSimulateSMS}
-              >
-                <MessageCircle className="h-4 w-4 mr-2" />
-                Simulate SMS
-              </Button>
-            </div>
+          
+          <div className="mt-4 space-y-3">
+            <Label htmlFor="messageInput">Send a Message</Label>
+            <Textarea
+              id="messageInput"
+              placeholder="Type your message here..."
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              className="min-h-[100px]"
+            />
+            <Button 
+              className="w-full"
+              disabled={!message.trim()}
+              onClick={() => {
+                toast({
+                  title: "Message Sent",
+                  description: "Your message has been sent successfully"
+                });
+                setMessage("");
+              }}
+            >
+              <MessageCircle className="h-4 w-4 mr-2" />
+              Send Message
+            </Button>
           </div>
         </div>
+        
+        {/* Payment Dialog */}
+        <Dialog open={showPaymentDialog} onOpenChange={setShowPaymentDialog}>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>Send Payment Request</DialogTitle>
+              <DialogDescription>
+                Enter the amount you want to request for your services.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="grid gap-4 py-4">
+              <div className="grid gap-2">
+                <Label htmlFor="paymentAmount">Amount (₹)</Label>
+                <div className="relative">
+                  <IndianRupee className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+                  <Input
+                    id="paymentAmount"
+                    className="pl-9"
+                    value={paymentAmount}
+                    onChange={(e) => setPaymentAmount(e.target.value)}
+                    type="number"
+                    placeholder="Enter amount"
+                  />
+                </div>
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="paymentNote">Note (Optional)</Label>
+                <Textarea
+                  id="paymentNote"
+                  placeholder="Add a note about this payment..."
+                  rows={3}
+                />
+              </div>
+            </div>
+            <DialogFooter>
+              <Button variant="outline" onClick={() => setShowPaymentDialog(false)}>
+                Cancel
+              </Button>
+              <Button onClick={handleProcessPayment} disabled={processing}>
+                {processing ? "Processing..." : "Send Request"}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+        
+        {/* Schedule Dialog */}
+        <Dialog open={showScheduleDialog} onOpenChange={setShowScheduleDialog}>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>Schedule Pickup</DialogTitle>
+              <DialogDescription>
+                Select a date and time for the cargo pickup.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="grid gap-4 py-4">
+              <div className="grid gap-2">
+                <Label htmlFor="pickupDate">Pickup Date</Label>
+                <Input
+                  id="pickupDate"
+                  type="date"
+                  value={pickupDate}
+                  onChange={(e) => setPickupDate(e.target.value)}
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="pickupTime">Pickup Time</Label>
+                <Input
+                  id="pickupTime"
+                  type="time"
+                  defaultValue="09:00"
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="scheduleNote">Additional Instructions</Label>
+                <Textarea
+                  id="scheduleNote"
+                  placeholder="Add any special instructions for pickup..."
+                  rows={3}
+                />
+              </div>
+            </div>
+            <DialogFooter>
+              <Button variant="outline" onClick={() => setShowScheduleDialog(false)}>
+                Cancel
+              </Button>
+              <Button onClick={handleConfirmSchedule} disabled={processing}>
+                {processing ? "Processing..." : "Confirm Schedule"}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
     );
   } catch (error) {
