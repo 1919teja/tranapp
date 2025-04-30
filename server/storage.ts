@@ -51,6 +51,51 @@ export class MemStorage implements IStorage {
   private truckIdCounter: number;
   private cargoRequestIdCounter: number;
   private farmerRequestIdCounter: number;
+  
+  // Store in session for persistence across restarts
+  private saveToSessionStorage() {
+    try {
+      // Store data in global object to persist between server restarts
+      if (typeof global !== 'undefined') {
+        (global as any).__memStorage = {
+          users: Array.from(this.users.entries()),
+          trucks: Array.from(this.trucks.entries()),
+          cargoRequests: Array.from(this.cargoRequests.entries()),
+          farmerRequests: Array.from(this.farmerRequests.entries()),
+          userIdCounter: this.userIdCounter,
+          truckIdCounter: this.truckIdCounter,
+          cargoRequestIdCounter: this.cargoRequestIdCounter,
+          farmerRequestIdCounter: this.farmerRequestIdCounter,
+        };
+      }
+    } catch (error) {
+      console.error('Failed to save storage to session:', error);
+    }
+  }
+  
+  private loadFromSessionStorage() {
+    try {
+      // Try to load data from global object
+      if (typeof global !== 'undefined' && (global as any).__memStorage) {
+        const data = (global as any).__memStorage;
+        
+        this.users = new Map(data.users);
+        this.trucks = new Map(data.trucks);
+        this.cargoRequests = new Map(data.cargoRequests);
+        this.farmerRequests = new Map(data.farmerRequests);
+        this.userIdCounter = data.userIdCounter;
+        this.truckIdCounter = data.truckIdCounter;
+        this.cargoRequestIdCounter = data.cargoRequestIdCounter;
+        this.farmerRequestIdCounter = data.farmerRequestIdCounter;
+        
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error('Failed to load storage from session:', error);
+      return false;
+    }
+  }
 
   constructor() {
     this.users = new Map();
@@ -62,8 +107,14 @@ export class MemStorage implements IStorage {
     this.cargoRequestIdCounter = 1;
     this.farmerRequestIdCounter = 1;
     
-    // Add some sample trucks for testing
-    this.createDummyData();
+    // Try to load data from session storage first
+    const loaded = this.loadFromSessionStorage();
+    
+    // If no data was loaded, create dummy data
+    if (!loaded) {
+      // Add some sample trucks for testing
+      this.createDummyData();
+    }
   }
   
   private createDummyData() {
