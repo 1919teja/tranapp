@@ -48,21 +48,21 @@ export default function AboutPage() {
               {/* Team Member 1 */}
               <div className="text-center">
                 <div className="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-4"></div>
-                <h3 className="text-xl font-semibold">Rajesh Kumar</h3>
+                <h3 className="text-xl font-semibold">kottapally</h3>
                 <p className="text-gray-500">Founder & CEO</p>
               </div>
               
               {/* Team Member 2 */}
               <div className="text-center">
                 <div className="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-4"></div>
-                <h3 className="text-xl font-semibold">Priya Sharma</h3>
+                <h3 className="text-xl font-semibold">marri </h3>
                 <p className="text-gray-500">CTO</p>
               </div>
               
               {/* Team Member 3 */}
               <div className="text-center">
                 <div className="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-4"></div>
-                <h3 className="text-xl font-semibold">Vikram Reddy</h3>
+                <h3 className="text-xl font-semibold">hanamkonda </h3>
                 <p className="text-gray-500">Head of Operations</p>
               </div>
             </div>
