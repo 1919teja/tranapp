@@ -25,7 +25,7 @@ export default function InvestorsPage() {
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Investors</h2>
             <p className="max-w-3xl mx-auto text-lg text-gray-600">
-              TruckConnect Telangana is backed by leading investors who believe in our vision of 
+              {t("app.title")} Telangana is backed by leading investors who believe in our vision of 
               transforming rural transportation and logistics.
             </p>
           </div>
@@ -118,7 +118,7 @@ export default function InvestorsPage() {
             Join us in our mission to transform transportation and logistics in rural India.
           </p>
           <a 
-            href="mailto:investors@truckconnect.in" 
+            href="mailto:investors@loopout.in" 
             className="inline-block px-8 py-3 bg-white text-primary font-medium rounded-md hover:bg-gray-100 transition"
           >
             Contact Our Investment Team
@@ -129,7 +129,7 @@ export default function InvestorsPage() {
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12 mt-auto">
         <div className="container mx-auto px-4 text-center">
-          <p>&copy; 2025 TruckConnect Telangana. All rights reserved.</p>
+          <p>&copy; 2025 {t("app.title")} Telangana. All rights reserved.</p>
         </div>
       </footer>
     </div>
