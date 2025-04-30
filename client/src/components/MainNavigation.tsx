@@ -26,6 +26,7 @@ export default function MainNavigation() {
   const navigationItems = [
     { name: t("nav.home"), href: "/" },
     { name: t("nav.about"), href: "/about" },
+    { name: t("nav.contact"), href: "/contact" },
     { name: t("nav.investors"), href: "/investors" },
     { name: t("nav.partners"), href: "/partners" },
   ];

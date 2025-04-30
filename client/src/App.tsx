@@ -5,6 +5,7 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import LandingPage from "@/pages/LandingPage";
 import AboutPage from "@/pages/AboutPage";
+import ContactPage from "@/pages/ContactPage";
 import InvestorsPage from "@/pages/InvestorsPage";
 import PartnersPage from "@/pages/PartnersPage";
 import ContactModal from "./components/ContactModal";
@@ -18,6 +19,7 @@ function AppRouter() {
       <Route path="/" component={LandingPage} />
       <Route path="/app" component={Home} />
       <Route path="/about" component={AboutPage} />
+      <Route path="/contact" component={ContactPage} />
       <Route path="/investors" component={InvestorsPage} />
       <Route path="/partners" component={PartnersPage} />
       <Route component={NotFound} />

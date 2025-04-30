@@ -63,6 +63,7 @@ const translations: TranslationsType = {
     
     "nav.home": "Home",
     "nav.about": "About",
+    "nav.contact": "Contact",
     "nav.investors": "Investors",
     "nav.partners": "Partners",
     
@@ -96,6 +97,11 @@ const translations: TranslationsType = {
     "user.truck_owner": "ట్రక్ యజమాని",
     "user.cargo_requester": "కార్గో అభ్యర్థిదారు",
     "user.farmer": "రైతు (రైతు సువిధ)",
+    "nav.home": "హోమ్",
+    "nav.about": "గురించి",
+    "nav.contact": "సంప్రదించండి",
+    "nav.investors": "ఇన్వెస్టర్లు",
+    "nav.partners": "భాగస్వాములు",
     "truck.list_title": "అందుబాటులో ఉన్న ట్రక్కులు",
     "truck.capacity": "సామర్థ్యం",
     "truck.location": "ప్రాంతం",
