@@ -1,0 +1,22 @@
+Overall Goal: Create a rudimentary Android mobile application MVP on Replit to connect truck owners with both general cargo requesters and farmers in Telangana (initially focusing around Kazipet). The app should feature distinct sections for each user type, facilitate direct communication (basic simulation), and allow for listing/finding transport options, keeping in mind the goal of eliminating traditional brokers.
+
+Core Functionality (MVP on Replit - Simplified for Mobile):
+
+User Type Selection: An initial screen allowing users to identify themselves as either a "Truck Owner," a "General Cargo Requester," or a "Farmer."
+
+Truck Owner Interface:
+
+Simplified Vehicle Listing: A basic form to list their truck (type, approximate capacity, general availability - perhaps a simple on/off status).
+View Requests: A screen to view incoming transport requests (both general and farmer-specific), displaying origin, destination (text-based), and a brief description.
+Basic "Contact User" Simulation: A button to simulate contacting the requester (e.g., displaying a placeholder phone number or a simple alert).
+General Cargo Requester Interface:
+
+Simple Cargo Posting: A form with essential fields: Pickup Location (text input), Delivery Location (text input), Brief Cargo Description, and basic weight/size (optional).
+Browse Trucks: A very basic list of available trucks (displaying truck type and general availability). No real-time map or sophisticated filtering for this MVP.
+"Request Transport" Action: A button to send a simulated transport request to the truck owner (e.g., storing the request data locally or displaying a confirmation message).
+Farmer's Urgent Transport Interface ("Rythu Suvidha" - Simplified for Mobile):
+
+Prominent Section: Easily accessible from the main user type selection.
+Simplified Urgent Request Form: Fields for Pickup Location (text, with potential for saving common farm locations), Delivery Location (text - nearby market/storage), Type of Crop (dropdown with common Telangana crops), and Urgency level (e.g., "Immediate," "Within 24 hours").
+Browse Available Trucks (Prioritized): A basic list of trucks, potentially prioritizing those that have indicated availability or are generally located in the vicinity (very rudimentary for MVP).
+"Request Urgent Transport" Action: A button to send a simulated urgent transport request.
