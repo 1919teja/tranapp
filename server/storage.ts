@@ -207,12 +207,15 @@ export class MemStorage implements IStorage {
 
   async createUser(insertUser: InsertUser): Promise<User> {
     const id = this.userIdCounter++;
+    const now = new Date();
     const user: User = { 
       ...insertUser, 
       id,
-      phoneNumber: insertUser.phoneNumber ?? null 
+      phoneNumber: insertUser.phoneNumber ?? null,
+      createdAt: now
     };
     this.users.set(id, user);
+    this.saveToSessionStorage(); // Save after creating user
     return user;
   }
 
@@ -225,9 +228,12 @@ export class MemStorage implements IStorage {
       registrationNumber: insertTruck.registrationNumber ?? null,
       available: insertTruck.available ?? null,
       location: insertTruck.location ?? null,
-      farmerFriendly: insertTruck.farmerFriendly ?? null
+      farmerFriendly: insertTruck.farmerFriendly ?? null,
+      driverName: insertTruck.driverName ?? null,
+      description: insertTruck.description ?? null
     };
     this.trucks.set(id, truck);
+    this.saveToSessionStorage(); // Save after creating truck
     return truck;
   }
 
@@ -253,6 +259,7 @@ export class MemStorage implements IStorage {
     
     const updatedTruck = { ...truck, ...updates };
     this.trucks.set(id, updatedTruck);
+    this.saveToSessionStorage(); // Save after updating truck
     return updatedTruck;
   }
 
@@ -270,6 +277,7 @@ export class MemStorage implements IStorage {
       weight: insertRequest.weight ?? null
     };
     this.cargoRequests.set(id, request);
+    this.saveToSessionStorage(); // Save after creating cargo request
     return request;
   }
 
@@ -293,6 +301,7 @@ export class MemStorage implements IStorage {
     
     const updatedRequest = { ...request, ...updates };
     this.cargoRequests.set(id, updatedRequest);
+    this.saveToSessionStorage(); // Save after updating cargo request
     return updatedRequest;
   }
 
@@ -310,6 +319,7 @@ export class MemStorage implements IStorage {
       pickupTime: insertRequest.pickupTime ?? null
     };
     this.farmerRequests.set(id, request);
+    this.saveToSessionStorage(); // Save after creating farmer request
     return request;
   }
 
@@ -333,6 +343,7 @@ export class MemStorage implements IStorage {
     
     const updatedRequest = { ...request, ...updates };
     this.farmerRequests.set(id, updatedRequest);
+    this.saveToSessionStorage(); // Save after updating farmer request
     return updatedRequest;
   }
 }

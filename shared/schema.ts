@@ -13,6 +13,7 @@ export const users = pgTable("users", {
   password: text("password").notNull(),
   userType: text("user_type").notNull(),
   phoneNumber: text("phone_number"),
+  createdAt: timestamp("created_at").defaultNow(),
 });
 
 export const insertUserSchema = createInsertSchema(users).pick({
@@ -32,6 +33,8 @@ export const trucks = pgTable("trucks", {
   available: boolean("available").default(false),
   location: text("location"),
   farmerFriendly: boolean("farmer_friendly").default(false),
+  driverName: text("driver_name"),
+  description: text("description"),
 });
 
 export const insertTruckSchema = createInsertSchema(trucks).pick({
@@ -42,6 +45,8 @@ export const insertTruckSchema = createInsertSchema(trucks).pick({
   available: true,
   location: true,
   farmerFriendly: true,
+  driverName: true,
+  description: true,
 });
 
 // Cargo Request Schema
