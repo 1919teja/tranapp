@@ -1,5 +1,7 @@
 import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
+import express from "express";
+import path from "path";
 import { storage } from "./storage";
 import { 
   insertUserSchema, 
@@ -10,6 +12,9 @@ import {
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Serve static files from the public directory
+  app.use('/images', express.static(path.join(process.cwd(), 'public/images')));
+  
   // User routes
   app.post("/api/users", async (req: Request, res: Response) => {
     try {

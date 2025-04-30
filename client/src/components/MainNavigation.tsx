@@ -31,7 +31,7 @@ export default function MainNavigation() {
   ];
 
   return (
-    <header className="bg-gradient-to-r from-primary-dark via-primary to-purple-600 text-white sticky top-0 z-50 shadow-lg">
+    <header className="bg-gradient-to-r from-gray-900 via-primary to-blue-600 text-white sticky top-0 z-50 shadow-lg">
       <div className="container mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
           {/* Logo and App title */}
@@ -97,7 +97,7 @@ export default function MainNavigation() {
 
       {/* Mobile menu, show/hide based on menu state */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-gradient-to-r from-primary to-purple-800 border-t border-white/10">
+        <div className="md:hidden bg-gradient-to-r from-gray-800 to-primary border-t border-white/10">
           <div className="container mx-auto px-4 py-3 space-y-1">
             {navigationItems.map((item) => (
               <Link 

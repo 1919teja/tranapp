@@ -12,7 +12,7 @@ export default function LandingPage() {
       <MainNavigation />
       
       {/* Hero Section with Animated Background */}
-      <section className="relative bg-gradient-to-br from-primary-dark via-primary to-purple-600 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-gray-900 via-primary to-blue-400 overflow-hidden">
         <div className="absolute inset-0 bg-[url('/images/moving-dots.svg')] bg-repeat opacity-30"></div>
         
         <div className="container mx-auto px-4 py-20 md:py-24 relative z-10">
@@ -210,7 +210,7 @@ export default function LandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-primary py-16">
+      <section className="bg-gradient-to-r from-gray-900 via-primary to-blue-600 py-16">
         <div className="container mx-auto px-4">
           <div className="text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
