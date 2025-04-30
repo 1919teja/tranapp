@@ -1,7 +1,7 @@
 import MainNavigation from "@/components/MainNavigation";
 import { useLanguage } from "@/context/LanguageContext";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle, Truck, CircleDollarSign, Clock, Shield } from "lucide-react";
+import { ArrowRight, CheckCircle, Truck, CircleDollarSign, Clock, Shield, FileCheck } from "lucide-react";
 import { Link } from "wouter";
 
 export default function LandingPage() {
@@ -122,11 +122,11 @@ export default function LandingPage() {
       <section className="py-16 md:py-24 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{t("home.section2.title")}</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Why Choose TruckConnect?</h2>
             <div className="w-24 h-1 bg-primary mx-auto"></div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Feature 1 */}
             <div className="bg-white rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow">
               <div className="text-primary mb-4">
@@ -157,6 +157,17 @@ export default function LandingPage() {
               <h3 className="text-xl font-semibold mb-3">{t("home.section2.reason3")}</h3>
               <p className="text-gray-600">
                 Farmers get priority service with special rates and urgent handling of perishable goods.
+              </p>
+            </div>
+
+            {/* Feature 4 - Insurance */}
+            <div className="bg-white rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow">
+              <div className="text-primary mb-4">
+                <FileCheck className="h-10 w-10" />
+              </div>
+              <h3 className="text-xl font-semibold mb-3">Comprehensive Insurance</h3>
+              <p className="text-gray-600">
+                Every shipment is automatically covered by our insurance policy, protecting your goods against damage or loss during transit.
               </p>
             </div>
           </div>
