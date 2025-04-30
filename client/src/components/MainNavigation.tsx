@@ -97,18 +97,18 @@ export default function MainNavigation() {
 
       {/* Mobile menu, show/hide based on menu state */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-primary border-t border-white/10">
+        <div className="md:hidden bg-gradient-to-r from-primary to-purple-800 border-t border-white/10">
           <div className="container mx-auto px-4 py-3 space-y-1">
             {navigationItems.map((item) => (
-              <Link key={item.href} href={item.href}>
-                <a
-                  className={`block px-3 py-2 rounded-md text-base font-medium ${
-                    location === item.href ? "bg-primary-dark text-white" : "text-white/70 hover:bg-primary-dark hover:text-white"
-                  }`}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </a>
+              <Link 
+                key={item.href} 
+                href={item.href}
+                className={`block px-3 py-2 rounded-md text-base font-medium ${
+                  location === item.href ? "bg-primary-dark text-white" : "text-white/70 hover:bg-white/10 hover:text-white"
+                }`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {item.name}
               </Link>
             ))}
             {user && (
